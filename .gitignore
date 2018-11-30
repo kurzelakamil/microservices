@@ -26,3 +26,23 @@ hs_err_pid*
 /.target
 _gitignore
 
+configserver/.classpath
+configserver/.project
+configserver/.settings/
+configserver/_classpath.xml
+configserver/_project.xml
+configserver/target/
+eurekaserver/.gitignore
+first/.classpath
+first/.idea/
+first/.project
+first/.settings/
+first/target/
+second/.classpath
+second/.project
+second/.settings/
+second/.springBeans
+second/_classpath.xml
+second/_project.xml
+second/bin/
+second/target/

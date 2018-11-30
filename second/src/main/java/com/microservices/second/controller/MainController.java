@@ -17,12 +17,9 @@ public class MainController {
 	@Autowired
 	private DiscoveryClient discoveryClient;
 
-	@Value("${desc}")
-	private String response;
-
 	@RequestMapping
 	public String sendResponse() {
-		return response;
+		return "hello World";
 	}
 
 	@RequestMapping("/service-instances/{applicationName}")

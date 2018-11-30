@@ -3,6 +3,6 @@ spring:
     config:  
       server: 
         git: 
-         uri: /home/kamil/Pulpit/microservices/serverrepo
+         uri: https://github.com/kurzelakamil/microservices/tree/master/serverproperties
 server:
  port: 8888
