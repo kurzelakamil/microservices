@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: first-service
+  config: 
+    name: configserver
+  cloud: 
+    config: 
+      uri: http://localhost:8888
+server: 
+ port: 9090
