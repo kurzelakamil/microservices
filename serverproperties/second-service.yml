@@ -1,3 +1,4 @@
+desc: helloWorld
 client: 
  serviceUrl: 
   default: http://localhost:8761/eureka
