@@ -1,7 +1,7 @@
 spring:
   application:
     name: second-service
-  config:  
+  config: 
     name: configserver
   cloud: 
     config: 
