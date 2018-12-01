@@ -1,10 +1,10 @@
 spring:
   application:
    name: eureka-server
-  config: 
-   name: configserver
+  config:  
+    name: configserver
   cloud: 
-   config: 
-    uri: http://localhost:8888
+    config: 
+      uri: http://localhost:8888
 server: 
   port: 8761

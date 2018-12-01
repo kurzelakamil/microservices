@@ -1,8 +1,10 @@
-spring:
+spring: 
   cloud:  
     config:  
       server: 
         git: 
-         uri: https://github.com/kurzelakamil/microservices/tree/master/serverproperties
-server:
+         uri: http://github.com/kurzelakamil/microservices/tree/master/serverproperties
+  config: 
+    name: configserver
+server: 
  port: 8888

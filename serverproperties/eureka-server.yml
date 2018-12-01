@@ -1,11 +1,10 @@
-eureka:
-	client:
-		registerWithEureka: false
-		fetchRegistry: false
-
-logging:
-	level:
-		com:
-			netflix:
-				eureka: OFF
-				discovery: OFF
+eureka: 
+ client: 
+  registerWithEureka: false
+  fetchRegistry: false
+logging: 
+ level: 
+  com: 
+   netflix: 
+    eureka: OFF
+    discovery: OFF
