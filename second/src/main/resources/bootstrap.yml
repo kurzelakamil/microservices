@@ -1,10 +1,20 @@
 spring:
   application:
     name: second-service
-  config:  
+  config: 
     name: configserver
   cloud: 
     config: 
       uri: http://localhost:8888
+  flyway: 
+   enabled: true
+   url: jdbc:h2:mem://testdb;DB_CLOSE_DELAY=-1
+   locations: classpath:db/migration
+   user: root
+   password: password 
+   #schemas: jbt_db
+  jpa: 
+    hibernate: 
+      ddl-auto: none
 server: 
  port: 9090

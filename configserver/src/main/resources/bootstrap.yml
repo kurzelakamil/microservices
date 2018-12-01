@@ -2,8 +2,8 @@ spring:
   cloud:  
     config:  
       server: 
-        git: 
-         uri: http://github.com/kurzelakamil/microservices/tree/master/serverproperties
+        git:
+          uri: http://github.com/kurzelakamil/microservices/tree/master/serverproperties
   config: 
     name: configserver
 server: 
