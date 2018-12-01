@@ -46,3 +46,8 @@ second/_classpath.xml
 second/_project.xml
 second/bin/
 second/target/
+eurekaserver/.classpath
+eurekaserver/.project
+eurekaserver/.settings
+eurekaserver/target
+
