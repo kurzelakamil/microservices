@@ -3,8 +3,7 @@ spring:
     config:  
       server: 
         git:
-          uri: https://github.com/kurzelakamil/microservices/tree/feature/database/serverproperties 
-         #uri: http://github.com/kurzelakamil/microservices/tree/master/serverproperties
+          uri: http://github.com/kurzelakamil/microservices/tree/master/serverproperties
   config: 
     name: configserver
 server: 
