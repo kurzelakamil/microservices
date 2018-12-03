@@ -50,7 +50,7 @@ public class Application {
 	@Value("${kafka.topic.requestReplyTopic")
 	private String requestReplyTopic;
 	
-	@Value("${kafka.bootstrap-servers}")
+	@Value("${kafka.server}")
 	private String kafkaServer;
 	
 	@Value("${kafka.group}")
