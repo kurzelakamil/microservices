@@ -19,18 +19,6 @@ import com.microservices.second.model.Model;
 @RestController
 public class MainController {
 
-	@Value("${sqlStatement}")
-	private String sqlStatement;
-
-	@Value("${sqlUrl}")
-	private String sqlUrl;
-
-	@Value("${sqlUser}")
-	private String sqlUser;
-
-	@Value("${sqlPassword}")
-	private String sqlPassword;
-
 	@Autowired
 	private DiscoveryClient discoveryClient;
 
@@ -39,7 +27,7 @@ public class MainController {
 		return getDataFromDb();
 	}
 
-	@KafkaListener(topics = "request", groupId = "group-id")
+	@KafkaListener(topics = "requestTopic", groupId = "group-id")
 	@SendTo
 	public Model listen(Model request) throws InterruptedException {
 		request.setString(getDataFromDb());
@@ -50,7 +38,7 @@ public class MainController {
 		String sql = "SELECT * FROM message";
 		String response = "";
 		try {
-			Connection conn = DriverManager.getConnection(sqlUrl, sqlUser, sqlPassword);
+			Connection conn = DriverManager.getConnection("jdbc:h2:mem://testdb", "root", "password");
 			PreparedStatement preStm = conn.prepareStatement(sql);
 			ResultSet rs = preStm.executeQuery();
 			if (rs.next()) {

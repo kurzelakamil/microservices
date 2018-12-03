@@ -21,9 +21,6 @@ import com.microservices.second.model.Model;
 @RestController
 public class MainController {
 
-	@Value("${kafka.topic.requestReplyTopic")
-	private String requestReplyTopic;
-
 	RestTemplate restTemplate;
 	Model model;
 	ReplyingKafkaTemplate<String, Model, Model> kafkaTemplate;
@@ -41,14 +38,14 @@ public class MainController {
 
 	@GetMapping("/")
 	public String sendRequestByRestTemplate() {
-		return restTemplate.getForObject("http://second-service/kafka", String.class);
+		return restTemplate.getForObject("http://second-service/", String.class);
 	}
 
 	@GetMapping("/kafka")
 	public String sendRequestByKafka() throws InterruptedException, ExecutionException {
 		model.setString("request");
-		ProducerRecord<String, Model> record = new ProducerRecord<String, Model>("request", model);
-		record.headers().add(new RecordHeader(KafkaHeaders.REPLY_TOPIC, requestReplyTopic.getBytes()));
+		ProducerRecord<String, Model> record = new ProducerRecord<String, Model>("requestTopic", model);
+		record.headers().add(new RecordHeader(KafkaHeaders.REPLY_TOPIC, "requestReplyTopic".getBytes()));
 		RequestReplyFuture<String, Model, Model> sendAndReceive = kafkaTemplate.sendAndReceive(record);
 		SendResult<String, Model> sendResult = sendAndReceive.getSendFuture().get();
 		sendResult.getProducerRecord().headers()
