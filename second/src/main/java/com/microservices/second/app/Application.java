@@ -28,6 +28,7 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 
 @SpringBootApplication
@@ -40,62 +41,20 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
+	
+	@Value("${kafka.topic.requestReplyTopic")
+	private String requestReplyTopic;
 
-//	@Bean
-//	public ProducerFactory<String, String> producerFactory() {
-//		return new DefaultKafkaProducerFactory<>(producerConfigs());
-//	}
-//
-//	@Bean
-//	public KafkaMessageListenerContainer<String, String> replyContainer(ConsumerFactory<String, String> cf) {
-//		ContainerProperties containerProperties = new ContainerProperties("requestReplyTopic");
-//		return new KafkaMessageListenerContainer<>(cf, containerProperties);
-//	}
-//
-//	@Bean
-//	public Map<String, Object> producerConfigs() {
-//		Map<String, Object> props = new HashMap<>();
-//		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-//		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-//		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-//		return props;
-//	}
-//
-//	@Bean
-//	public Map<String, Object> consumerConfigs() {
-//		Map<String, Object> props = new HashMap<>();
-//		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-//		props.put(ConsumerConfig.GROUP_ID_CONFIG, "group-id");
-//		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-//		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-//		return props;
-//	}
-//
-//	@Bean
-//	public ReplyingKafkaTemplate<String, String, String> replyKafkaTemplate(ProducerFactory<String, String> pf,
-//			KafkaMessageListenerContainer<String, String> container) {
-//		return new ReplyingKafkaTemplate<>(pf, container);
-//	}
-//
-//	@Bean
-//	public ConsumerFactory<String, String> consumerFactory() {
-//		return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new StringDeserializer(),
-//				new JsonDeserializer<>(String.class));
-//	}
-//
-//	@Bean
-//	public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerContainerFactory() {
-//		ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-//		factory.setConsumerFactory(consumerFactory());
-//		// NOTE - set up of reply template
-//		factory.setReplyTemplate(kafkaTemplate());
-//		return factory;
-//	}
-//
-//	@Bean
-//	public KafkaTemplate<String, String> kafkaTemplate() {
-//		return new KafkaTemplate<>(producerFactory());
-//	}
+	@Value("${kafka.bootstrap-servers}")
+	private String kafkaServer;
+	
+	@Value("${kafka.group}")
+	private String kafkaGroup;
+	
+	@Bean
+	public KafkaTemplate<String, Model> kafkaTemplate() {
+		return new KafkaTemplate<>(producerFactory());
+	}
 
 	@Bean
 	public ProducerFactory<String, Model> producerFactory() {
@@ -104,14 +63,14 @@ public class Application {
 
 	@Bean
 	public KafkaMessageListenerContainer<String, Model> replyContainer(ConsumerFactory<String, Model> cf) {
-		ContainerProperties containerProperties = new ContainerProperties("requestReplyTopic");
+		ContainerProperties containerProperties = new ContainerProperties(requestReplyTopic);
 		return new KafkaMessageListenerContainer<>(cf, containerProperties);
 	}
 
 	@Bean
 	public Map<String, Object> producerConfigs() {
 		Map<String, Object> props = new HashMap<>();
-		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 		return props;
@@ -120,8 +79,8 @@ public class Application {
 	@Bean
 	public Map<String, Object> consumerConfigs() {
 		Map<String, Object> props = new HashMap<>();
-		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-		props.put(ConsumerConfig.GROUP_ID_CONFIG, "group-id");
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
+		props.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaGroup);
 		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 		return props;
@@ -143,13 +102,7 @@ public class Application {
 	public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, Model>> kafkaListenerContainerFactory() {
 		ConcurrentKafkaListenerContainerFactory<String, Model> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(consumerFactory());
-		// NOTE - set up of reply template
 		factory.setReplyTemplate(kafkaTemplate());
 		return factory;
-	}
-
-	@Bean
-	public KafkaTemplate<String, Model> kafkaTemplate() {
-		return new KafkaTemplate<>(producerFactory());
 	}
 }

@@ -1,28 +1,10 @@
 spring:
   application:
     name: second-service
-  config: 
+  config:
     name: configserver
-  cloud: 
-    config: 
+  cloud:
+    config:
       uri: http://localhost:8888
-  flyway: 
-   enabled: true
-   url: jdbc:h2:mem://testdb;DB_CLOSE_DELAY=-1
-   locations: classpath:db/migration
-   user: root
-   password: password 
-  jpa: 
-    hibernate: 
-      ddl-auto: none
-  kafka: 
-   bootstrap-servers: localhost:9092
-   consumer: 
-    group-id: group-id
-    properties: 
-     spring: 
-      json: 
-       trusted: 
-        packages: "*"
-server: 
- port: 9090
+server:
+  port: 9090
