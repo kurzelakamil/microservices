@@ -25,7 +25,7 @@ public class MainController {
 	private String requestReplyTopic;
 
 	RestTemplate restTemplate;
-	Model model = new Model();
+	Model model;
 	ReplyingKafkaTemplate<String, Model, Model> kafkaTemplate;
 
 	@Autowired

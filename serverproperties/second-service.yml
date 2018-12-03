@@ -5,11 +5,9 @@ sqlStatement: SELECT * FROM message
 sqlUrl: jdbc:h2:mem://testdb
 sqlUser: root
 sqlPassword: password
-kafka:
- bootstrap-servers: localhost:9092 
- topic:
-  requestReplyTopic: requestReply
- group: group-id 
+kafka.bootstrap-servers: localhost:9092 
+kafka.requestReplyTopic: requestReply
+kafka.group: group-id 
 spring: 
  flyway: 
    enabled: true
