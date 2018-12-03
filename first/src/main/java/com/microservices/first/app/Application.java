@@ -44,16 +44,16 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@Value("${kafka.topic.requestTopic")
+	@Value("${requestTopic}")
 	private String requestTopic;
 	
-	@Value("${kafka.topic.requestReplyTopic")
+	@Value("${requestReplyTopic}")
 	private String requestReplyTopic;
 	
-	@Value("${kafka.server}")
+	@Value("${kafkaServer}")
 	private String kafkaServer;
 	
-	@Value("${kafka.group}")
+	@Value("${kafkaGroup}")
 	private String kafkaGroup;
 	
 	@Bean
