@@ -12,9 +12,17 @@ spring:
    locations: classpath:db/migration
    user: root
    password: password 
-   #schemas: jbt_db
   jpa: 
     hibernate: 
       ddl-auto: none
+  kafka: 
+   bootstrap-servers: localhost:9092
+   consumer: 
+    group-id: group-id
+    properties: 
+     spring: 
+      json: 
+       trusted: 
+        packages: "*"
 server: 
  port: 9090

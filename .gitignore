@@ -51,3 +51,6 @@ eurekaserver/.project
 eurekaserver/.settings
 eurekaserver/target
 
+./mvn/*
+mvnw
+mvnw.cmd

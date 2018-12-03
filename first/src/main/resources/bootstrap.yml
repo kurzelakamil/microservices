@@ -1,10 +1,19 @@
 spring:
   application:
     name: first-service
-  config: 
+  config:
     name: configserver
-  cloud: 
-    config: 
+  cloud:
+    config:
       uri: http://localhost:8888
-server: 
- port: 8080
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: group-id
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+server:
+  port: 8080
