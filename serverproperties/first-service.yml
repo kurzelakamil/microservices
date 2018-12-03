@@ -1,8 +1,7 @@
 client: 
  serviceUrl: 
   default: http://localhost:8761/eureka
-kafkaServer: localhost:9092 
-requestTopic: request 
+requestTopic: request
 requestReplyTopic: requestReply
 kafkaGroup: group-id
 
